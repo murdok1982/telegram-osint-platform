@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 import models, database, schemas
+import hispan_shield_guardian
 from typing import List
 import datetime
 
