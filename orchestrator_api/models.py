@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 import datetime
 from database import Base
 
+
 class Message(Base):
     __tablename__ = "messages"
 
@@ -18,24 +19,26 @@ class Message(Base):
     metadata_json = Column(JSON)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
+
 class Case(Base):
     __tablename__ = "cases"
 
     id = Column(Integer, primary_key=True, index=True)
-    status = Column(String, default="open") # open, analyzing, closed
+    status = Column(String, default="open", index=True)
     user_hash = Column(String, index=True)
     risk_score = Column(Float)
     initial_message_id = Column(Integer, ForeignKey("messages.id"))
     summary = Column(Text)
-    agent_analysis = Column(JSON) # Combined results from A, B, C
+    agent_analysis = Column(JSON)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+
 
 class AuditLog(Base):
     __tablename__ = "audit_logs"
 
     id = Column(Integer, primary_key=True, index=True)
-    action = Column(String)
+    action = Column(String, index=True)
     user_id = Column(String)
     details = Column(JSON)
     timestamp = Column(DateTime, default=datetime.datetime.utcnow)

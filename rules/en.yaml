@@ -1,56 +1,119 @@
-phrases_high_risk:
-  # Terrorism / Radicalization
-  - "death to the west"
-  - "join the jihad"
-  - "holy war"
-  - "suicide vest"
-  - "pledge allegiance"
-  # Trafficking / Weapons
-  - "shipping drugs"
-  - "assault rifles for sale"
-  - "unregistered firearms"
-  - "fake passports"
-  - "money laundering"
-  # Extreme Left / Sabotage
-  - "armed insurrection"
-  - "overthrow the regime"
-  - "infrastructure sabotage"
-  - "burn the system"
-  - "urban guerrilla"
-  # Espionage
-  - "classified document leak"
-  - "intel breach"
-  - "industrial espionage"
-  # Child Exploitation (IOCs)
-  - "cp channel link"
-  - "leaked kids material"
-
-keywords_medium_risk:
-  - "bomb"
-  - "explosives"
-  - "terrorism"
-  - "drugs"
-  - "weapons"
-  - "attack"
-  - "revolution"
-  - "intelligence"
-  - "hacked"
-  - "anarchy"
-
-regex_indicators:
-  - "(?i)(terrorist|jihad|explosive|isis)"
-  - "(?i)(heroin|cocaine|fentanyl|smuggling)"
-  - "(?i)(ak-47|firearms|ammunition|glock)"
-  - "(?i)(leaked|classified|top secret)"
+language: "en"
+version: "3.0"
 
 topic_buckets:
   - category: "terrorism"
-    weight: 2.0
+    weight: 2.6
   - category: "trafficking"
-    weight: 1.8
+    weight: 2.2
   - category: "extremism"
-    weight: 1.5
+    weight: 2.0
   - category: "espionage"
-    weight: 1.7
+    weight: 1.8
   - category: "pedophilia"
     weight: 3.0
+
+emoji_indicators:
+  weight: 0.8
+  items: ["💣","🧨","🔫","🗡️","⚔️","🏴","☠️","🩸"]
+
+euphemisms:
+  weight: 1.4
+  items:
+    - "the package"
+    - "the goods"
+    - "the stuff"
+    - "the gift"
+    - "the party"
+    - "the wedding"
+    - "medicine"
+    - "snow"
+    - "candy"
+    - "sugar"
+
+slang_regional:
+  weight: 1.6
+  items:
+    - "mules"
+    - "stash"
+    - "heat"
+    - "piece"
+    - "iron"
+    - "blower"
+    - "brass"
+    - "coke"
+    - "weed"
+    - "blow"
+
+phrases_high_risk:
+  weight: 3.0
+  items:
+    - "death to the west"
+    - "join the jihad"
+    - "holy war"
+    - "suicide vest"
+    - "pledge allegiance"
+    - "shipping drugs"
+    - "assault rifles for sale"
+    - "unregistered firearms"
+    - "fake passports"
+    - "money laundering"
+    - "armed insurrection"
+    - "overthrow the regime"
+    - "infrastructure sabotage"
+    - "burn the system"
+    - "urban guerrilla"
+    - "classified document leak"
+    - "intel breach"
+    - "industrial espionage"
+
+keywords_medium_risk:
+  weight: 2.0
+  items:
+    - "bomb"
+    - "explosives"
+    - "terrorism"
+    - "drugs"
+    - "weapons"
+    - "attack"
+    - "revolution"
+    - "intelligence"
+    - "hacked"
+    - "anarchy"
+    - "smuggling"
+    - "trafficking"
+    - "radicalization"
+    - "recruitment"
+
+regex_indicators:
+  weight: 2.2
+  items:
+    - "(?i)(terrorist|jihad|explosive|isis)"
+    - "(?i)(heroin|cocaine|fentanyl|smuggling)"
+    - "(?i)(ak-47|firearms|ammunition|glock)"
+    - "(?i)(leaked|classified|top secret)"
+    - "(?i)(suicide\\s?(bomb|vest|attack))"
+    - "(?i)(fake\\s?(passport|document|id))"
+
+behavioral_patterns:
+  weight: 2.2
+  intent_markers: ["going to","we will","soon","it's time to","ready to"]
+  recruitment_markers: ["dm me","join us","serious people only","message me privately"]
+  logistics_markers: ["delivery","meeting point","address","time","drop","pickup"]
+
+arabizi:
+  weight: 1.5
+  patterns:
+    - "(?i)(j[i1]had|d[a@]wla|sh[a@]h[i1]d)"
+  digit_map:
+    "3": "ع"
+    "7": "ح"
+    "2": "ء"
+    "5": "خ"
+    "9": "ق"
+
+normalization:
+  remove_diacritics: true
+  normalize_alef: true
+  normalize_hamza: true
+  normalize_teh_marbuta: true

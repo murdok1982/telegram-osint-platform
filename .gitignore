@@ -1,6 +1,5 @@
 # Environment variables
 .env
-.env.example
 
 # Python
 __pycache__/
@@ -10,9 +9,10 @@ venv/
 .venv/
 
 # Data & Sessions
-data/
-collector_session.session
-collector_session.session-journal
+data/*.session
+data/*.session-journal
+data/*.pdf
+data/*.json
 
 # IDEs
 .vscode/
@@ -21,3 +21,6 @@ collector_session.session-journal
 # OS
 .DS_Store
 Thumbs.db
+
+# Docker
+*.log
